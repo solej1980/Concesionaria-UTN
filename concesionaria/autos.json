@@ -1,0 +1,72 @@
+[
+  {
+    "modelo": "Toyota Corolla GR",
+    "kilometraje": 12000,
+    "marca": "Toyota",
+    "precio": 14500000,
+    "imagen": "img/2023-toyota-gr-corolla-circuit-edition-exterior.webp"
+  },
+  {
+    "modelo": "Volkswagen Golf GTI",
+    "kilometraje": 8500,
+    "marca": "Volkswagen",
+    "precio": 18900000,
+    "imagen": "https://cdn.motor1.com/images/mgl/1Zp0k/s1/volkswagen-golf-gti-2022.jpg"
+  },
+  {
+    "modelo": "Fiat Cronos Precision",
+    "kilometraje": 24000,
+    "marca": "Fiat",
+    "precio": 9700000,
+    "imagen": "https://cdn.motor1.com/images/mgl/Vz6bJ/s3/fiat-cronos-2023.jpg"
+  },
+  {
+    "modelo": "Peugeot 208 GT Line",
+    "kilometraje": 16000,
+    "marca": "Peugeot",
+    "precio": 11500000,
+    "imagen": "https://cdn.motor1.com/images/mgl/nm22B/s3/peugeot-208-gt-line-2023.jpg"
+  },
+  {
+    "modelo": "Ford Mustang GT",
+    "kilometraje": 7000,
+    "marca": "Ford",
+    "precio": 39500000,
+    "imagen": "https://cdn.motor1.com/images/mgl/ooWQk/s3/ford-mustang-gt-2024.jpg"
+  },
+  {
+    "modelo": "Chevrolet Onix Premier",
+    "kilometraje": 22000,
+    "marca": "Chevrolet",
+    "precio": 9800000,
+    "imagen": "https://cdn.motor1.com/images/mgl/QeLk1/s3/chevrolet-onix-premier-2023.jpg"
+  },
+  {
+    "modelo": "Nissan 370Z Nismo",
+    "kilometraje": 15000,
+    "marca": "Nissan",
+    "precio": 28900000,
+    "imagen": "https://cdn.motor1.com/images/mgl/njXJb/s3/nissan-370z-nismo.jpg"
+  },
+  {
+    "modelo": "BMW M2 Competition",
+    "kilometraje": 5000,
+    "marca": "BMW",
+    "precio": 48500000,
+    "imagen": "https://cdn.motor1.com/images/mgl/7pL4g/s3/bmw-m2-competition.jpg"
+  },
+  {
+    "modelo": "Audi A3 Sportback",
+    "kilometraje": 18000,
+    "marca": "Audi",
+    "precio": 21800000,
+    "imagen": "https://cdn.motor1.com/images/mgl/6BvR8/s3/audi-a3-sportback-2023.jpg"
+  },
+  {
+    "modelo": "Mercedes-Benz A200",
+    "kilometraje": 9000,
+    "marca": "Mercedes-Benz",
+    "precio": 25900000,
+    "imagen": "https://cdn.motor1.com/images/mgl/Y4kOn/s3/mercedes-a200-2023.jpg"
+  }
+]
