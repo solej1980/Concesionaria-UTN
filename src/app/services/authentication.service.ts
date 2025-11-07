@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal, computed } from "@angular/core";
 import { Usuario, Cliente, Admin } from "../interfaces/usuario.interface";
 import { Observable } from "rxjs";
 import { UsuarioService } from "./usuario.service";
@@ -14,6 +14,11 @@ type ResultadoLogin =
 })
 
 export class AuthenticationService{
+    private readonly usuario = signal<Cliente | Admin | null>(null);
+
+    private readonly esAdmin = computed(() => this.usuario()?.tipo === 'admin');
+    private readonly esCliente = computed(() => this.usuario()?.tipo === 'cliente');
+    private readonly estaLogueado = computed(() => this.usuario() !== null);
 
     constructor(private usuarioService: UsuarioService){}
 
@@ -27,33 +32,17 @@ export class AuthenticationService{
                 if(usuarioEncontrado.contraseña != contraseña){
                     return {resultado: 'contraseña_incorrecta'} as ResultadoLogin;
                 }
-                localStorage.setItem('usuarioEnLinea', JSON.stringify(usuarioEncontrado));
+                this.usuario.set(usuarioEncontrado);
                 return {resultado: 'exitoso', usuario: usuarioEncontrado} as ResultadoLogin;
             })
         );
     }
 
     logout(): void{
-        localStorage.removeItem('usuarioEnLinea');
+        this.usuario.set(null);
     }
 
     getUsuarioEnLinea(): Cliente | Admin | null{
-        const usuarioEnLinea = localStorage.getItem('usuarioEnLinea');
-        return usuarioEnLinea ? JSON.parse(usuarioEnLinea) : null; 
-    }
-
-    esAdmin(): boolean{
-        return this.getUsuarioEnLinea()?.tipo === 'admin';
-    }
-
-    esCliente(): boolean{
-        return this.getUsuarioEnLinea()?.tipo === 'cliente';
-    }
-
-    estaLogueado(): boolean{
-        if(this.getUsuarioEnLinea() === null){
-            return false;
-        }
-        return true;
+        return this.usuario();
     }
 }
