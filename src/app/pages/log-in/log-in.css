@@ -1,0 +1,18 @@
+.login-container{
+    width: 300px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+form input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+button{
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}

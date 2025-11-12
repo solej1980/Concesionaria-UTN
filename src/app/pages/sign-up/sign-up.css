@@ -1,0 +1,85 @@
+/* Contenedor principal */
+.signup-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px 25px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Título */
+.signup-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Formularios y labels */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Inputs */
+input,
+select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+  border-color: #0078d7;
+  box-shadow: 0 0 0 2px rgba(0, 120, 215, 0.15);
+}
+
+/* Botón */
+button {
+  margin-top: 10px;
+  background-color: #0078d7;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Mensajes o enlaces extra */
+.signup-container p {
+  text-align: center;
+  margin-top: 15px;
+  color: #666;
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .signup-container {
+    margin: 30px 15px;
+    padding: 20px;
+  }
+}
