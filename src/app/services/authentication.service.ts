@@ -44,7 +44,7 @@ export class AuthenticationService{
         ...newUser,
         //idUsuario: nuevoId,
         tipo: 'cliente',
-        favoritos: [] // se inicializa vacío
+        favoritos: []
       };
 
         return this.usuarioService.agregarUsuario(clienteAGuardar).pipe(
