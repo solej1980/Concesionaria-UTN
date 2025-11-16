@@ -1,0 +1,48 @@
+
+@let auto = detalle();
+
+@if (auto) {
+
+  <div class="detalle-container">
+
+    <div class="galeria">
+
+      <img class="car-img-principal" [src]="auto.imagen[currentIndex]" alt="Foto del auto" />
+
+      <div class="miniaturas">
+        @for (img of auto.imagen; track $index; let i = $index) {
+          <img
+            class="miniatura"
+            [class.activa]="i === currentIndex"
+            [src]="img"
+            (click)="currentIndex = i"
+          />
+        }
+      </div>
+    </div>
+
+    <div class="info-auto">
+      <h2>{{ auto.marca }} {{ auto.modelo }} ({{ auto.anio }})</h2>
+
+      <p><strong>Precio:</strong> u$s{{ auto.precio }}</p>
+      <p><strong>Color:</strong> {{ auto.color }}</p>
+      <p><strong>Kilometraje:</strong> {{ auto.kilometros }} km</p>
+      <p><strong>Potencia:</strong> {{ auto.hp }}</p>
+      <p><strong>Transmisión:</strong> {{ auto.transmision }}</p>
+      <p><strong>Combustible:</strong> {{ auto.combustible }}</p>
+
+      <p><strong>Concesionaria:</strong> {{ auto.concesionaria }}</p>
+      <p><strong>Teléfono:</strong> {{ auto.telefono }}</p>
+      <p><strong>Dirección:</strong> {{ auto.direccion }}</p>
+
+      <div class="botones">
+        <button class="volver" (click)="volver()">Volver al catálogo</button>
+        <button class="cita">Solicitar cita</button>
+      </div>
+    </div>
+
+  </div>
+
+} @else {
+  <p>No se encontró el auto</p>
+}
