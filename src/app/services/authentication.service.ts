@@ -93,6 +93,8 @@ export class AuthenticationService{
         return this.usuario() != null;
     }
 
+    //Nos encontramos con el inconveniente de que, al actualizar campos de usuario (como su lista de favoritos, por ejemplo) el sitio solo se actualizaba al recargar
+    //ya que volvían a cargarse los servicios de get desde el JSON. Con esta función logramos actualizar en tiempo real el sitio.
     actualizarUsuarioEnLinea(usuarioActualizado: Cliente | Admin): void {
         this.usuario.set(usuarioActualizado);
         localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
