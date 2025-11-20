@@ -46,13 +46,13 @@ export class AutoFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.formAuto = this.formBuilder.group({
-    id: [null],
+    id: [null], //El id se setea como null, ya que la función agregarAuto() (presente en AutoService) se encarga de generar un id autoincremental al momento del guardado en JSON.
     precio: ['', [Validators.required, Validators.min(1)]],
     color: ['', Validators.required],
     kilometros: [0, [Validators.required, Validators.min(0)]],
     disponible: [true],
     imagen: [''], 
-    idMarca: ['', Validators.required],
+    idMarca: ['', Validators.required], //Utilización temporal de este campo para acceder a las marcas disponibles. Se elimina antes de realizar el submit ya que no pertenece a la estructura Auto
     idModelo: ['', Validators.required],
     idConcesionaria: [null, Validators.required]
   });
@@ -88,14 +88,10 @@ export class AutoFormComponent implements OnInit{
   }
 
 
+  //Gestión de agregado de marca nueva
   protected mostrarModalMarca = false;
   abrirModalMarca() { this.mostrarModalMarca = true; }
   cerrarModalMarca() { this.mostrarModalMarca = false; }
-
-  protected mostrarModalModelo = false;
-  abrirModalModelo() { this.mostrarModalModelo = true; }
-  cerrarModalModelo() { this.mostrarModalModelo = false; }
-
 
   protected nombreMarcaNueva = '';
   crearMarca() {
@@ -107,6 +103,10 @@ export class AutoFormComponent implements OnInit{
     });
   }
 
+  //Gestión de agregado de modelo nuevo
+  protected mostrarModalModelo = false;
+  abrirModalModelo() { this.mostrarModalModelo = true; }
+  cerrarModalModelo() { this.mostrarModalModelo = false; }
 
   protected nuevoModeloNombre = '';
   protected nuevoModeloAnio: number | string = '';
@@ -132,6 +132,7 @@ export class AutoFormComponent implements OnInit{
     });
   }
 
+  
   onSubmit(): void{
     if(this.formAuto.valid){
       //Elimino el campo idMarca
