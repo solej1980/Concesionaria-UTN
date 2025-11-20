@@ -56,6 +56,7 @@ export class Detalle implements OnInit{
     this.router.navigateByUrl('/catalogo');
   }
 
+  //Gestión de herramienta de financiación
   mostrarFinanciacion = signal(false);
   precioSeleccionado = signal<number | null>(null);
 
@@ -93,6 +94,7 @@ export class Detalle implements OnInit{
   }
 
 
+  //Funcionalidad de eliminación de auto
   eliminarAuto(idAuto: number | string): void{
     if(confirm('Está seguro de eliminar este auto?')){
       this.autoService.eliminarAuto(Number(idAuto)).subscribe(() => {
@@ -101,13 +103,8 @@ export class Detalle implements OnInit{
     }
   }
 
-
-  //Formulario de solicitud de cita
-
-  protected formularioVisible = signal<boolean>(false);
-  protected formCita!: FormGroup;
+  //Funcionalidad de edición de auto
   protected modoEdicion = signal<boolean>(false);
-
   activarEdicion() {
     this.modoEdicion.set(true);
   }
@@ -115,6 +112,33 @@ export class Detalle implements OnInit{
   cancelarEdicion() {
     this.modoEdicion.set(false);
   }
+
+  guardarCambios(autoActualizado: any){
+    const autoActualizadoPrimitivo: Auto = {
+      ...this.auto()!.auto,
+      ...autoActualizado
+    }
+
+    const autoActualizadoCompleto: AutoCompleto = {
+      ...this.auto()!,
+      auto: {
+        ...this.auto()!.auto,
+        ...autoActualizado
+      }
+    }
+    this.autoService.modificarAuto(autoActualizadoPrimitivo)
+    .subscribe(() => {
+      this.auto.set(autoActualizadoCompleto);
+      this.modoEdicion.set(false);
+      alert('Auto actualizado con éxito');
+    });
+  }
+
+
+  //Formulario de solicitud de cita
+
+  protected formularioVisible = signal<boolean>(false);
+  protected formCita!: FormGroup;
 
   ngOnInit(): void {
     this.formCita = this.formBuilder.group({
@@ -172,25 +196,6 @@ export class Detalle implements OnInit{
     }
   }
 
-  guardarCambios(autoActualizado: any){
-    const autoActualizadoPrimitivo: Auto = {
-      ...this.auto()!.auto,
-      ...autoActualizado
-    }
-
-    const autoActualizadoCompleto: AutoCompleto = {
-      ...this.auto()!,
-      auto: {
-        ...this.auto()!.auto,
-        ...autoActualizado
-      }
-    }
-    this.autoService.modificarAuto(autoActualizadoPrimitivo)
-    .subscribe(() => {
-      this.auto.set(autoActualizadoCompleto);
-      this.modoEdicion.set(false);
-      alert('Auto actualizado con éxito');
-    });
-  }
+  
 
 }
