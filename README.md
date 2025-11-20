@@ -1,7 +1,8 @@
 ## 🚘 Concesionaria Autos Usados – UTN
 
 Proyecto web desarrollado para la gestión de vehículos usados.
-Los clientes pueden **publicar autos**, **solicitar una cita para ver el modelo**, **agregar autos a favoritos** y navegar por un **catálogo completo** de unidades disponibles con **filtros de búsqueda ya implementados**.
+Los clientes pueden ver autos publicados, solicitar una cita para ver el modelo, agregar autos a favoritos y navegar por un catálogo completo de unidades disponibles con filtros de búsqueda y ordenamiento ya implementados. A su vez, los administradores pueden ver los autos disponibles en su sucursal, registrar nuevos autos, editar autos existentes y visualizar las citas reservadas en su sucursal. Por otro lado, todos los usuarios pueden acceder a la funcionalidad del Simulador de Financiación.
+A su vez, el sistema utiliza una serie de Guards que permiten o restringen la navegación a ciertas rutas en base al tipo de usuario. Por ejemplo, los administradores no pueden entrar al componente detalle de autos que no son parte de su concesionaria. La totalidad de Guards implementados puede verse en la carpeta src/app/guards.
 
 ---
 
@@ -9,7 +10,6 @@ Los clientes pueden **publicar autos**, **solicitar una cita para ver el modelo*
 
 ✔️ Catálogo de autos usados
 ✔️ Detalle del vehículo con información completa
-✔️ Publicación de autos por parte de los usuarios
 ✔️ Solicitud de citas para ver un vehículo
 ✔️ Sistema de favoritos
 ✔️ Inicio de sesión para acceso a funciones avanzadas
@@ -33,10 +33,12 @@ Los clientes pueden **publicar autos**, **solicitar una cita para ver el modelo*
 ### 📂 Componentes del proyecto
 
 * `login`
+* `sign up`
 * `catalogo de autos`
 * `detalle del vehiculo`
 * `simulador de financiacion`
 * `favoritos`
+* `citas`
 
 ---
 
@@ -86,9 +88,10 @@ ng serve -o
 
 ### 🛣️ Mejoras futuras (Roadmap)
 
-* [ ] Integración con base de datos real
+* [ ] Agregado de sección Perfil, con posibilidad de edición de datos personales
+* [ ] Lógica compleja de Citas, con notificaciones por cambios de estado
 * [ ] Implementación de notificaciones
-* [ ] Mejora UI/UX
+* [ ] Mejoras de interfaz visual
 
 ---
 
