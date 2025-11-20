@@ -11,6 +11,10 @@
     {
       "idMarca": 3,
       "nombre": "Chevrolet"
+    },
+    {
+      "idMarca": 4,
+      "nombre": "Citroen"
     }
   ],
   "modelos": [
@@ -49,6 +53,24 @@
       "transmision": "Automática",
       "combustible": "Diesel",
       "idMarca": 3
+    },
+    {
+      "idModelo": 5,
+      "nombre": "C3",
+      "año": 2018,
+      "hp": 115,
+      "transmision": "Manual",
+      "combustible": "Nafta",
+      "idMarca": 4
+    },
+    {
+      "idModelo": 6,
+      "nombre": "Aveo",
+      "año": 2011,
+      "hp": 103,
+      "transmision": "Manual",
+      "combustible": "Nafta",
+      "idMarca": 3
     }
   ],
   "concesionarias": [
@@ -70,7 +92,7 @@
   "autos": [
     {
       "idAuto": 1,
-      "precio": 22000,
+      "precio": 30800000,
       "color": "Blanco",
       "kilometros": 15000,
       "disponible": true,
@@ -84,7 +106,7 @@
     },
     {
       "idAuto": 2,
-      "precio": 18000,
+      "precio": 27600000,
       "color": "Rojo",
       "kilometros": 22000,
       "disponible": true,
@@ -96,7 +118,7 @@
     },
     {
       "idAuto": 3,
-      "precio": 16000,
+      "precio": 22400000,
       "color": "Negro",
       "kilometros": 35000,
       "disponible": false,
@@ -106,13 +128,33 @@
     },
     {
       "idAuto": 4,
-      "precio": 25000,
+      "precio": 35000000,
       "color": "Gris",
       "kilometros": 12000,
       "disponible": true,
       "imagen": ["https://i.ibb.co/zHnR2sJb/cruze1.webp"],
       "idModelo": 4,
       "idConcesionaria": 2
+    },
+    {
+      "idAuto": 5,
+      "precio": 17500000,
+      "color": "Blanco",
+      "kilometros": 94000,
+      "disponible": true,
+      "imagen":["https://i.ibb.co/jvKM7wB2/c3-1.webp", "https://i.ibb.co/KpRb8YvP/c3-3.webp","https://i.ibb.co/qMq8zmF0/c3-2.webp"],
+      "idModelo": 5,
+      "idConcesionaria": 2
+    },
+    {
+      "idAuto": 6,
+      "precio": 8200000,
+      "color": "Beige",
+      "kilometros": 290000,
+      "disponible": true,
+      "imagen":["https://i.ibb.co/CKRg34cc/aveo1.jpg", "https://i.ibb.co/pB4V7XVY/aveo2.jpg","https://i.ibb.co/TB7QQrhh/aveo3.jpg"],
+      "idModelo": 6,
+      "idConcesionaria": 1
     }
   ],
   "usuarios": [

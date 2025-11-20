@@ -14,13 +14,12 @@ import { ModeloService } from '../../../services/modelo.service';
 })
 export class Catalogo {
 
-   private readonly autoService = inject(AutoService);
+  private readonly autoService = inject(AutoService);
   private readonly modeloService = inject(ModeloService);
   private readonly marcaService = inject(MarcaService);
   private readonly concesionariaService = inject(ConcesionariaService);
   private readonly router = inject(Router);
 
-  // ✅ Signals
   protected readonly autos = toSignal(this.autoService.getAutos());
   protected readonly modelos = toSignal(this.modeloService.getModelos());
   protected readonly marcas = toSignal(this.marcaService.getMarcas());
@@ -34,7 +33,6 @@ export class Catalogo {
       this.concesionarias() === undefined
   );
 
-  // ✅ Computed para combinar datos correctamente
   protected readonly autosConNombres = computed(() => {
   const autos = this.autos() ?? [];
   const modelos = this.modelos() ?? [];

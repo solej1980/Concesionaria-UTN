@@ -1,115 +1,116 @@
 * {
   font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  background: #f5f7fa;
+  margin: 0;
 }
 
-h1, h2, h3, .btn, .volver, .cita {
-  font-family: "Montserrat", sans-serif;
-}
-
-
+/* CONTENEDOR GENERAL */
 .detalle-container {
   display: flex;
-  gap: 30px;
-  padding: 20px;
+  gap: 40px;
+  padding: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeIn .4s ease-in-out;
+}
+
+/* IMAGEN PRINCIPAL */
+.car-img-principal {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 16 / 9;        /* 🔥 proporción fija */
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform .3s;
+}
+
+.car-img-principal:hover {
+  transform: scale(1.02);
+}
+
+/* MINIATURAS */
+.miniaturas {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-/* GALERÍA */
-.galeria {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Imagen principal */
-.car-img-principal {
-  width: 100%;
-  max-width: 500px;
-  height: 360px;            /* 🔥 asegura mismo tamaño SIEMPRE */
-  border-radius: 8px;
-  object-fit: cover;        /* recorta sin deformar */
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
-
-/* Miniaturas */
-.miniaturas {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-  flex-wrap: wrap;           /* 🔥 evita que se descuadren */
-  justify-content: center;
-}
-
 .miniatura {
-  width: 85px;
-  height: 65px;
+  width: 140px;
+  aspect-ratio: 16 / 9;        /* 🔥 misma proporción que la principal */
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
-  opacity: 0.55;
-  transition: .2s;
+  opacity: .6;
+  transition: .25s;
+  border: 2px solid transparent;
 }
 
-.miniatura.activa,
-.miniatura:hover {
+.miniatura:hover,
+.miniatura.activa {
   opacity: 1;
-  border: 2px solid #007bff;
+  border-color: #007bff;
 }
 
-/* FICHA DE INFORMACIÓN */
+/* INFO */
 .info-auto {
   flex: 1;
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 22px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+  background: white;
+  border-radius: 14px;
+  padding: 35px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .info-auto h2 {
-  margin-bottom: 18px;
-  font-size: 24px;
+  font-size: 28px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
 }
 
 .info-auto p {
-  margin: 6px 0;
-  font-size: 16px;
+  font-size: 17px;
+  margin: 7px 0;
 }
 
 /* BOTONES */
 .botones {
-  margin-top: 30px;
+  margin-top: 35px;
   display: flex;
-  gap: 18px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-button.volver,
-button.cita {
-  padding: 11px 22px;
+.btn {
+  padding: 12px 28px;
+  border-radius: 8px;
   border: none;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 15px;
+  font-weight: 600;
+  transition: .25s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.10);
 }
 
-button.volver {
-  background: #6c757d;
+.btn-primario {
+  background: linear-gradient(90deg, #690ba7, #b987cb);
   color: white;
 }
 
-button.cita {
-  background: #28a745;
-  color: white;
+.btn-primario:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
 }
 
-button.volver:hover,
-button.cita:hover {
-  opacity: 0.85;
-  transform: scale(1.03);
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

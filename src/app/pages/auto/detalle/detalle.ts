@@ -1,14 +1,15 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutoService } from '../../../services/auto.service';
 import { ConcesionariaService } from '../../../services/concesionaria.service';
 import { ModeloService } from '../../../services/modelo.service';
 import { MarcaService } from '../../../services/marca.service';
+import { Financiacion } from '../financiacion/financiacion';
 
 @Component({
   selector: 'app-detalle',
-  imports: [],
+  imports: [Financiacion],
   templateUrl: './detalle.html',
   styleUrl: './detalle.css'
 })
@@ -27,34 +28,32 @@ export class Detalle {
   protected readonly concesionarias = toSignal(this.concesionariaService.getConcesionarias());
   protected readonly marcas = toSignal(this.marcaService.getMarcas());
 
-  // Computamos toda la info del auto + modelo + concesionaria
   protected readonly detalle = computed(() => {
-  const auto = this.auto();
-  const modelos = this.modelos();
-  const concesionarias = this.concesionarias();
-  const marcas = this.marcas();
+    const auto = this.auto();
+    const modelos = this.modelos();
+    const concesionarias = this.concesionarias();
+    const marcas = this.marcas();
 
-  if (!auto || !modelos || !concesionarias || !marcas) return undefined;
+    if (!auto || !modelos || !concesionarias || !marcas) return undefined;
 
-  const modelo = modelos.find(m => Number(m.idModelo) === Number(auto.idModelo));
-  const concesionaria = concesionarias.find(c => Number(c.idConcesionaria) === Number(auto.idConcesionaria));
-  const marca = marcas.find(mc => Number(mc.idMarca) === Number(modelo?.idMarca));
+    const modelo = modelos.find(m => Number(m.idModelo) === Number(auto.idModelo));
+    const concesionaria = concesionarias.find(c => Number(c.idConcesionaria) === Number(auto.idConcesionaria));
+    const marca = marcas.find(mc => Number(mc.idMarca) === Number(modelo?.idMarca));
 
-  return {
-    ...auto,
-    modelo: modelo?.nombre ?? 'Desconocido',
-    marca: marca?.nombre ?? 'N/D',   // ⭐ CORRECTO
-    anio: modelo?.año ?? 'N/D',
-    hp: modelo?.hp ?? 'N/D',
-    transmision: modelo?.transmision ?? 'N/D',
-    combustible: modelo?.combustible ?? 'N/D',
-    concesionaria: concesionaria?.nombre ?? 'Desconocida',
-    direccion: concesionaria?.direccion ?? 'N/D',
-    telefono: concesionaria?.telefono ?? 'N/D',
-    imagen: auto.imagen ?? []
-  };
-});
-
+    return {
+      ...auto,
+      modelo: modelo?.nombre ?? 'Desconocido',
+      marca: marca?.nombre ?? 'N/D',
+      anio: modelo?.año ?? 'N/D',
+      hp: modelo?.hp ?? 'N/D',
+      transmision: modelo?.transmision ?? 'N/D',
+      combustible: modelo?.combustible ?? 'N/D',
+      concesionaria: concesionaria?.nombre ?? 'Desconocida',
+      direccion: concesionaria?.direccion ?? 'N/D',
+      telefono: concesionaria?.telefono ?? 'N/D',
+      imagen: auto.imagen ?? []
+    };
+  });
 
   currentIndex = 0;
 
@@ -71,5 +70,17 @@ export class Detalle {
   volver() {
     this.router.navigateByUrl('/catalogo');
   }
+
+   mostrarFinanciacion = signal(false);
+  precioSeleccionado = signal<number | null>(null);
+
+  abrirFinanciacion(precio: number) {
+    this.precioSeleccionado.set(precio);
+    this.mostrarFinanciacion.set(true);
+  }
+
+  cerrarFinanciacion() {
+  this.mostrarFinanciacion.set(false);
+}
 
 }

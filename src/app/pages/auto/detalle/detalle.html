@@ -1,9 +1,9 @@
-
 @let auto = detalle();
 
 @if (auto) {
 
-  <div class="detalle-container">
+  <!-- CONTENIDO PRINCIPAL (se blurea cuando se abre la financiación) -->
+  <div class="detalle-container" [class.blur]="mostrarFinanciacion()">
 
     <div class="galeria">
 
@@ -24,7 +24,7 @@
     <div class="info-auto">
       <h2>{{ auto.marca }} {{ auto.modelo }} ({{ auto.anio }})</h2>
 
-      <p><strong>Precio:</strong> u$s{{ auto.precio }}</p>
+      <p><strong>Precio:</strong> ${{ auto.precio }}</p>
       <p><strong>Color:</strong> {{ auto.color }}</p>
       <p><strong>Kilometraje:</strong> {{ auto.kilometros }} km</p>
       <p><strong>Potencia:</strong> {{ auto.hp }}</p>
@@ -36,8 +36,9 @@
       <p><strong>Dirección:</strong> {{ auto.direccion }}</p>
 
       <div class="botones">
-        <button class="volver" (click)="volver()">Volver al catálogo</button>
-        <button class="cita">Solicitar cita</button>
+        <button class="btn btn-primario" (click)="volver()">Volver al catálogo</button>
+        <button class="btn btn-primario" (click)="abrirFinanciacion(auto.precio)">Calcular financiación</button>
+        <button class="btn btn-primario">Solicitar cita</button>
       </div>
     </div>
 
@@ -45,4 +46,14 @@
 
 } @else {
   <p>No se encontró el auto</p>
+}
+
+<!-- MODAL DE FINANCIACIÓN -->
+@if (mostrarFinanciacion()) {
+  <div class="overlay">
+    <app-financiacion
+      [precio]="precioSeleccionado()!"
+      (cerrarFinanciacion)="cerrarFinanciacion()">
+    </app-financiacion>
+  </div>
 }
