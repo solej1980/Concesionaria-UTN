@@ -1,0 +1,100 @@
+import { Injectable, signal, computed } from "@angular/core";
+import { Usuario, Cliente, Admin } from "../interfaces/usuario.interface";
+import { Observable, of } from "rxjs";
+import { UsuarioService } from "./usuario.service";
+import { catchError, map } from 'rxjs/operators';
+import { toObservable } from "@angular/core/rxjs-interop";
+import { ActivatedRoute, Router } from "@angular/router";
+
+type ResultadoLogin = 
+    | {resultado: 'exitoso', usuario: Cliente | Admin}
+    | {resultado: 'password_incorrecta'}
+    | {resultado: 'mail_inexistente'}
+    | {resultado: 'mail_existente'};
+
+@Injectable({
+    providedIn: 'root'
+})
+
+export class AuthenticationService{
+    private readonly usuario = signal<Cliente | Admin | null>(null);
+
+    readonly esAdmin = computed(() => this.usuario()?.tipo === 'admin');
+    readonly esCliente = computed(() => this.usuario()?.tipo === 'cliente');
+    readonly estaLogueado = computed(() => this.usuario() !== null);
+
+    constructor(private usuarioService: UsuarioService,
+        private router: Router
+    ){}
+
+    initUsuario(): Promise<void> {
+        return new Promise(resolve => {
+            const saved = localStorage.getItem('usuario');
+            if (saved) {
+            try {
+                this.usuario.set(JSON.parse(saved));
+            } catch (e) {
+                this.usuario.set(null);
+            }
+            }
+            resolve();
+         });
+    }
+
+    login(email: string, password: string): Observable<ResultadoLogin>{
+        return this.usuarioService.getUsuarios().pipe(
+            map(usuarios => {
+
+                const usuarioEncontrado = usuarios.find(u => u.email === email);
+
+                if(!usuarioEncontrado){
+                    return {resultado: 'mail_inexistente'} as ResultadoLogin;
+                }
+
+                if(usuarioEncontrado.password.trim() != password.trim()){
+                    return {resultado: 'password_incorrecta'} as ResultadoLogin;
+                }
+                this.usuario.set(usuarioEncontrado);
+                localStorage.setItem('usuario', JSON.stringify(usuarioEncontrado));
+                return {resultado: 'exitoso', usuario: usuarioEncontrado} as ResultadoLogin;
+            })
+        );
+    }
+
+    signUp(newUser: Usuario ): Observable<ResultadoLogin>{
+        const nuevoId = Math.random() * 100000;
+        const clienteAGuardar: Cliente = {
+        ...newUser,
+        //idUsuario: nuevoId,
+        tipo: 'cliente',
+        favoritos: []
+      };
+
+        return this.usuarioService.agregarUsuario(clienteAGuardar).pipe(
+            map(currentUser =>{
+                this.usuario.set(currentUser);
+                return {resultado: 'exitoso',usuario:currentUser} as ResultadoLogin;
+            }),
+            //catchError(()=> of ({ resultado: 'error al registrar' } as unknown as ResultadoLogin))
+        );
+    }
+
+    logout(): void{
+        this.usuario.set(null);
+        localStorage.removeItem('usuario');
+        this.router.navigate(['/']);
+    }
+
+    getUsuarioEnLinea(): Cliente | Admin | null{
+        return this.usuario();
+    }
+
+    getUsuarioEnLineaBoolean(): boolean{
+        return this.usuario() != null;
+    }
+
+    actualizarUsuarioEnLinea(usuarioActualizado: Cliente | Admin): void {
+        this.usuario.set(usuarioActualizado);
+        localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+    }
+}
