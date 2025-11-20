@@ -25,6 +25,7 @@ export class BusquedaService {
     this.busqueda.set(busqueda);
   }
 
+  //Incorporamos Partial, que nos permitió actualizar solo los campos deseados dentro de FiltrosCatalogo
   actualizarFiltros(parcial: Partial<FiltrosCatalogo>){
     this.filtros.update(valoresActuales => ({...valoresActuales, ...parcial}));
   }
